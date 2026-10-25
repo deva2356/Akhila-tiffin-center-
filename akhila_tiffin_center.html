@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#174b35">
+<title>Akhila Tiffin Center | Vemulawada</title>
+<style>
+:root{--green:#174b35;--green2:#216747;--cream:#fff9ee;--orange:#f29b38;--ink:#203128;--muted:#66736b;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans Telugu",sans-serif}
+header{background:linear-gradient(135deg,#123b29,#28704b);color:white;padding:25px 16px 30px;text-align:center}
+.logo{font-size:34px}.brand{font-size:clamp(25px,6vw,38px);font-weight:800;margin:5px 0}.sub{margin:5px 0 0;color:#e0f1e5}
+.pill{display:inline-block;background:#ffffff1f;border:1px solid #ffffff50;padding:6px 12px;border-radius:99px;margin-top:13px;font-size:13px}
+main{max-width:900px;margin:0 auto;padding:18px 14px 110px}
+.intro h2{margin:5px 0;font-size:22px}.intro p{margin:4px 0 18px;color:var(--muted)}
+.menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{background:white;border:1px solid #eee5d8;border-radius:17px;padding:14px;box-shadow:0 4px 14px #1d3d2710;display:flex;flex-direction:column}
+.food-emoji{height:76px;display:grid;place-items:center;background:#fff3df;border-radius:12px;font-size:43px;margin-bottom:10px}
+.card h3{margin:0;font-size:17px}.telugu{font-size:13px;color:var(--muted);margin:3px 0 8px}
+.price{font-size:20px;font-weight:800;color:var(--green);margin-bottom:10px}
+.add{border:0;border-radius:10px;background:var(--green);color:white;padding:10px;font-size:14px;font-weight:700;cursor:pointer;margin-top:auto}
+.qtyrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto}
+.stepper{display:flex;align-items:center;gap:12px}
+.stepper button{width:34px;height:34px;border:1px solid #cbd9ce;background:#f4faf5;border-radius:9px;font-size:20px;color:var(--green);cursor:pointer}
+.stepper span{min-width:15px;text-align:center;font-weight:700}
+.cart{background:white;border:1px solid #e8e0d4;border-radius:17px;padding:17px;margin-top:20px}
+.cart h2{margin:0 0 12px;font-size:21px}.empty{color:var(--muted);padding:12px 0}
+.cartline{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #eee}
+.cartline small{display:block;color:var(--muted);margin-top:3px}
+.total{display:flex;justify-content:space-between;font-size:21px;font-weight:800;padding:15px 0}
+.field{display:block;font-weight:650;font-size:14px;margin:12px 0 5px}
+input,textarea{width:100%;padding:12px;border:1px solid #d5ddd5;border-radius:10px;background:#fff;font:inherit}
+textarea{resize:vertical;min-height:70px}
+.whatsapp{width:100%;border:0;border-radius:12px;padding:14px;background:#1eaa5b;color:white;font-size:16px;font-weight:800;cursor:pointer}
+.note{font-size:12px;color:var(--muted);line-height:1.5;margin-top:10px}
+footer{text-align:center;color:var(--muted);padding:18px;font-size:12px}
+@media(min-width:650px){.menu{grid-template-columns:repeat(3,minmax(0,1fr))}.card{padding:17px}}
+@media(max-width:350px){.menu{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">🍽️</div>
+  <div class="brand">Akhila Tiffin Center</div>
+  <p class="sub">అఖిల టిఫిన్ సెంటర్ · Fresh & Tasty Tiffins</p>
+  <div class="pill">📍 Vemulawada · వేములవాడ</div>
+</header>
+<main>
+  <section class="intro">
+    <h2>Our Menu / మా మెనూ</h2>
+    <p>మీకు నచ్చిన టిఫిన్ ఎంచుకోండి — Choose your favourite tiffin.</p>
+  </section>
+  <section class="menu" id="menu"></section>
+  <section class="cart" aria-live="polite">
+    <h2>🛒 Your Order / మీ ఆర్డర్</h2>
+    <div id="cartItems" class="empty">ఇంకా ఏమీ ఎంచుకోలేదు. Add items to start your order.</div>
+    <div class="total"><span>Total / మొత్తం</span><span id="total">₹0</span></div>
+    <label class="field" for="customer">Your name / మీ పేరు</label>
+    <input id="customer" autocomplete="name" placeholder="పేరు / Name">
+    <label class="field" for="phone">WhatsApp number of the shop / షాప్ WhatsApp నంబర్</label>
+    <input id="phone" inputmode="tel" placeholder="ఉదా: 919876543210">
+    <p class="note">మొదటిసారి మీ షాప్ WhatsApp నంబర్‌ను country code తో నమోదు చేయండి (India: 91 + 10-digit number). ఈ నంబర్ మీ బ్రౌజర్‌లో మాత్రమే ఉంటుంది.</p>
+    <label class="field" for="address">Pickup / delivery details (optional) · వివరాలు</label>
+    <textarea id="address" placeholder="ఉదా: Pickup at shop / delivery address"></textarea>
+    <button class="whatsapp" id="orderBtn">Order on WhatsApp · WhatsApp లో ఆర్డర్ చేయండి</button>
+    <p class="note">WhatsApp తెరుచుకున్నాక, ఆర్డర్ మెసేజ్‌ను చూసి Send నొక్కండి. Delivery అందుబాటు షాప్‌తో నిర్ధారించుకోండి.</p>
+  </section>
+</main>
+<footer>Made for Akhila Tiffin Center · Vemulawada</footer>
+<script>
+const products = [
+  {id:"plain-dosa",name:"Plain Dosa",te:"ప్లెయిన్ దోశ",price:40,emoji:"🥞",unit:"1 plate"},
+  {id:"masala-dosa",name:"Masala Dosa",te:"మసాలా దోశ",price:50,emoji:"🫓",unit:"1 plate"},
+  {id:"idli",name:"Idli",te:"ఇడ్లీ",price:25,emoji:"🍚",unit:"2 pieces"},
+  {id:"vada",name:"Medu Vada",te:"మినప వడ",price:30,emoji:"🍩",unit:"2 pieces"},
+  {id:"poori",name:"Poori",te:"పూరీ",price:40,emoji:"🫓",unit:"2 pieces"},
+  {id:"upma",name:"Upma",te:"ఉప్మా",price:35,emoji:"🥣",unit:"1 plate"}
+];
+const qty = Object.fromEntries(products.map(p=>[p.id,0]));
+const rupees = n => "₹" + n;
+function renderMenu(){
+  document.getElementById("menu").innerHTML = products.map(p=>`
+    <article class="card">
+      <div class="food-emoji" aria-hidden="true">${p.emoji}</div>
+      <h3>${p.name}</h3><div class="telugu">${p.te} · ${p.unit}</div>
+      <div class="price">${rupees(p.price)}</div>
+      <div class="qtyrow">
+        <button class="add" data-add="${p.id}" ${qty[p.id] ? 'hidden' : ''}>+ Add</button>
+        <div class="stepper" data-step="${p.id}" ${qty[p.id] ? '' : 'hidden'}>
+          <button aria-label="Decrease ${p.name}" data-minus="${p.id}">−</button>
+          <span>${qty[p.id]}</span>
+          <button aria-label="Increase ${p.name}" data-plus="${p.id}">+</button>
+        </div>
+      </div>
+    </article>`).join("");
+}
+function renderCart(){
+  const selected=products.filter(p=>qty[p.id]>0);
+  const area=document.getElementById("cartItems");
+  if(!selected.length){area.className="empty";area.textContent="ఇంకా ఏమీ ఎంచుకోలేదు. Add items to start your order."}
+  else{
+    area.className="";
+    area.innerHTML=selected.map(p=>`<div class="cartline"><div><strong>${p.name}</strong><small>${p.te} · ${rupees(p.price)} × ${qty[p.id]}</small></div><strong>${rupees(p.price*qty[p.id])}</strong></div>`).join("");
+  }
+  document.getElementById("total").textContent=rupees(selected.reduce((s,p)=>s+p.price*qty[p.id],0));
+  renderMenu();
+}
+document.getElementById("menu").addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;
+  const id=b.dataset.add||b.dataset.plus||b.dataset.minus;if(!id)return;
+  if(b.dataset.minus)qty[id]=Math.max(0,qty[id]-1);else qty[id]++;
+  renderCart();
+});
+document.getElementById("orderBtn").addEventListener("click",()=>{
+  const selected=products.filter(p=>qty[p.id]>0);
+  if(!selected.length){alert("దయచేసి ముందుగా food items ఎంచుకోండి. Please add items first.");return;}
+  const raw=document.getElementById("phone").value.trim();
+  const number=raw.replace(/[^\d]/g,"");
+  if(!number || number.length<10 || number.length>15){alert("షాప్ WhatsApp నంబర్‌ను country code తో నమోదు చేయండి. Enter the shop WhatsApp number with country code.");document.getElementById("phone").focus();return;}
+  const name=document.getElementById("customer").value.trim()||"Not provided";
+  const address=document.getElementById("address").value.trim()||"Not provided";
+  const lines=selected.map(p=>`${p.name} (${p.te}) x ${qty[p.id]} = ₹${p.price*qty[p.id]}`);
+  const total=selected.reduce((s,p)=>s+p.price*qty[p.id],0);
+  const message=`🍽️ *New Order - Akhila Tiffin Center*\n📍 Vemulawada\n\n${lines.join("\n")}\n\n*Total: ₹${total}*\nCustomer: ${name}\nPickup/Delivery details: ${address}\n\nPlease confirm my order.`;
+  window.open(`https://wa.me/${number}?text=${encodeURIComponent(message)}`,"_blank","noopener,noreferrer");
+});
+renderCart();
+</script>
+</body>
+</html>
